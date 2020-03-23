@@ -1,0 +1,5 @@
+.terraform/
+terraform.state
+terraform.state.backup
+
+apigateway_customdomain.tf
