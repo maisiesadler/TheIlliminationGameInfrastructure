@@ -48,3 +48,12 @@ resource "aws_iam_role_policy_attachment" "api_lambda_AWSLambdaENIManagementAcce
   role       = "${aws_iam_role.api_lambda.id}"
   policy_arn = "${data.aws_iam_policy.AWSLambdaENIManagementAccess.arn}"
 }
+
+data "aws_iam_policy" "AmazonSSMFullAccess" {
+  arn = "arn:aws:iam::aws:policy/AmazonSSMFullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "api_lambda_AmazonSSMFullAccess" {
+  role       = "${aws_iam_role.api_lambda.id}"
+  policy_arn = "${data.aws_iam_policy.AmazonSSMFullAccess.arn}"
+}

@@ -1,5 +1,7 @@
 resource "aws_vpc" "main" {
   cidr_block       = "10.0.0.0/16"
+  enable_dns_support = true
+  enable_dns_hostnames = true
 
   tags = {
     Name = "main"
@@ -51,6 +53,12 @@ resource "aws_route_table" "private" {
   tags = {
     Name = "private"
   }
+}
+
+resource "aws_route" "route" {
+  route_table_id            = "${aws_route_table.private.id}"
+  destination_cidr_block = "0.0.0.0/0"
+  instance_id = "${aws_instance.nat_instance.id}"
 }
 
 resource "aws_route_table_association" "public" {

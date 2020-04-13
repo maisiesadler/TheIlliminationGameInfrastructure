@@ -36,22 +36,23 @@ resource "aws_cognito_user_pool_client" "client" {
   allowed_oauth_flows = ["code", "implicit"]
 
   allowed_oauth_scopes = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
+
+  supported_identity_providers = [ "COGNITO", "Google" ]
 }
 
+resource "aws_cognito_identity_provider" "players_google_provider" {
+  user_pool_id  = "${aws_cognito_user_pool.players.id}"
+  provider_name = "Google"
+  provider_type = "Google"
 
-# resource "aws_cognito_identity_provider" "example_provider" {
-#   user_pool_id  = "${aws_cognito_user_pool.example.id}"
-#   provider_name = "Google"
-#   provider_type = "Google"
+  provider_details = {
+    authorize_scopes = "email"
+    client_id        = var.client_id
+    client_secret    = var.client_secret
+  }
 
-#   provider_details = {
-#     authorize_scopes = "email"
-#     client_id        = var.client_id
-#     client_secret    = var.client_secret
-#   }
-
-#   attribute_mapping = {
-#     email    = "email"
-#     username = "sub"
-#   }
-# }
+  attribute_mapping = {
+    email    = "email"
+    username = "sub"
+  }
+}

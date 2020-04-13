@@ -1,5 +1,7 @@
 .terraform/
-terraform.state
-terraform.state.backup
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.tfstate.backup
+.terraform.tfstate.lock.info
 
 apigateway_customdomain.tf

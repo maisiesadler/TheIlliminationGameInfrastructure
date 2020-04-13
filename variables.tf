@@ -5,3 +5,15 @@ variable "region" {
 variable "profile" {
   default = "illimination-deploy"
 }
+
+variable "userpool_client_id" {
+  default = ""
+}
+
+variable "userpool_client_secret" {
+  default = ""
+}
+
+variable "mongodbconnection" {
+  default = ""
+}
